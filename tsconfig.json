@@ -8,6 +8,7 @@
         "emitDeclarationOnly": true,
         "allowJs": true,
         "target": "ES2024",
-        "moduleResolution": "nodenext"
+        "moduleResolution": "nodenext",
+        "outDir": "typings"
     }
 }

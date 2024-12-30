@@ -60,6 +60,7 @@ export class App {
      */
     addCommandHandler(commandHandler) {
         this.commands.set(commandHandler.name, commandHandler);
+        commandHandler.app = this;
     }
 
     /**
@@ -68,6 +69,7 @@ export class App {
      */
     addEventHandler(eventHandler) {
         this.events.set(eventHandler.name, eventHandler);
+        eventHandler.app = this;
     }
 
 

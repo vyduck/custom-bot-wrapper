@@ -8,12 +8,7 @@ export class CommandHandler {
      * @param {PermissionsBitField} options.perms permissions required for executing the command handler
      * @param {SlashCommandBuilder} options.builder Discord constructor of the command
      */
-    constructor(app: App, { name, perms, exec, builder }: {
-        name: string;
-        exec: Function;
-        perms: PermissionsBitField;
-        builder: SlashCommandBuilder;
-    });
+    constructor({ name, perms, exec, builder }: App);
     /** @type {App} */
     app: App;
     /** @type {string} */

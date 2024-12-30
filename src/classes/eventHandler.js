@@ -26,20 +26,16 @@ export class EventHandler {
      * @param {PermissionsBitField} options.perms permissions required for executing the event handler
      * @param {Boolean} options.once whether this event should be executed only once
      */
-    constructor(app, {
+    constructor({
         name,
         perms = [],
         once,
         exec,
     }) {
-        this.app = app;
-
         this.name = name;
         this.perms = perms;
         this.exec = exec;
         this.once = once;
-
-        this.app.addEventHandler(this);
     }
 
     /**
