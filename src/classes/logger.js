@@ -19,7 +19,7 @@ export const logger = tag =>
         levels: logLevels,
         transports: [
             new winston.transports.Console({
-                level: "debug",
+                level: process.env.LOG ?? "info",
                 format: winston.format.combine(
                     winston.format.colorize(),
                     winston.format.padLevels({ levels: logLevels }),
