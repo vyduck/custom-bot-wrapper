@@ -28,7 +28,7 @@ export class EventHandler {
      */
     constructor({
         name,
-        perms = [],
+        perms = new PermissionsBitField(),
         once,
         exec,
     }) {

@@ -28,7 +28,7 @@ export class CommandHandler {
      */
     constructor({
         name,
-        perms = [],
+        perms = new PermissionsBitField(),
         exec,
         builder
     }) {

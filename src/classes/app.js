@@ -55,7 +55,6 @@ export class App {
     };
 
     /**
-     * @private
      * @param {CommandHandler} commandHandler command to be added
      */
     addCommandHandler(commandHandler) {
@@ -64,7 +63,6 @@ export class App {
     }
 
     /**
-     * @private
      * @param {EventHandler} eventHandler command to be added
      */
     addEventHandler(eventHandler) {

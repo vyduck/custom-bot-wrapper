@@ -27,15 +27,13 @@ export class App {
     /** @type {Object} */
     db: any;
     /**
-     * @private
      * @param {CommandHandler} commandHandler command to be added
      */
-    private addCommandHandler;
+    addCommandHandler(commandHandler: CommandHandler): void;
     /**
-     * @private
      * @param {EventHandler} eventHandler command to be added
      */
-    private addEventHandler;
+    addEventHandler(eventHandler: EventHandler): void;
     publishCommands(): Promise<void>;
     loadCommandHandlers(): void;
     loadEventHandlers(): void;
