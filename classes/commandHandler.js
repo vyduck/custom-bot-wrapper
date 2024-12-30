@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, Message, PermissionsBitField, SlashCommandBuilder } from "discord.js";
-import App from "./app";
+import { App } from "./app.js";
 
-class CommandHandler {
+export class CommandHandler {
     /** @type {App} */
     app;
 
@@ -74,5 +74,3 @@ class CommandHandler {
         }
     };
 };
-
-export default CommandHandler;

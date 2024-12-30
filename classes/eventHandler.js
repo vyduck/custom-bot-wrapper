@@ -1,7 +1,7 @@
-import App from "./app";
+import { App } from "./app.js";
 import { PermissionsBitField } from "discord.js";
 
-class EventHandler {
+export class EventHandler {
     /** @type {App} */
     app;
 
@@ -65,6 +65,4 @@ class EventHandler {
             }
         }
     }
-}
-
-export default EventHandler;
+};

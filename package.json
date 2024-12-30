@@ -1,6 +1,6 @@
 {
   "name": "cbw",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "this is a custom bot wrapper that i will be implementing in my existing and upcoming bots",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,8 @@
     "mongoose": "^8.9.2",
     "winston": "^3.17.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
 }

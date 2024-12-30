@@ -14,7 +14,7 @@ const today = new Date();
  * @param {*} tag 
  * @returns 
  */
-const logger = tag =>
+export const logger = tag =>
     winston.createLogger({
         levels: logLevels,
         transports: [
@@ -48,5 +48,3 @@ winston.addColors({
     info: 'green',
     debug: 'blue',
 });
-
-export default logger;

@@ -1,0 +1,13 @@
+{
+    "include": [
+        "**/*.js"
+    ],
+    "compilerOptions": {
+        "module": "NodeNext",
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "allowJs": true,
+        "target": "ES2024",
+        "moduleResolution": "nodenext"
+    }
+}

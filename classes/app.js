@@ -1,11 +1,11 @@
 import * as discord from "discord.js";
-import CommandHandler from "./commandHandler";
-import EventHandler from "./eventHandler";
-import logger from "./logger";
+import { CommandHandler } from "./commandHandler.js";
+import { EventHandler } from "./eventHandler.js";
+import { logger } from "./logger.js";
 import { Logger } from "winston";
 import mongoose from "mongoose";
 
-class App {
+export class App {
     /** @type {Object} */
     config;
 
@@ -34,7 +34,7 @@ class App {
      * @param {string} tag                  - a three letter tag for the logger
      */
     constructor({
-        intents = 0n,
+        intents = 0,
         clientId,
         token,
         dbURL = ""
@@ -52,7 +52,6 @@ class App {
         this.events = new discord.Collection();
 
         this.log = logger(tag);
-
     };
 
     /**
@@ -86,7 +85,7 @@ class App {
                 { body: commandData }
             );
 
-            this.log.info(`Successfully updated ${data.length} comamnds.`);
+            this.log.debug(`Successfully (re)published ${data.length} commands.`);
         } catch (error) {
             this.log.error("Error while uploading commands.", error);
         };
@@ -110,7 +109,8 @@ class App {
             } catch (error) {
                 this.log.error(`Error while executing the command: ${interaction.command}.`, error);
             }
-        })
+        });
+        this.log.debug("Loaded command handlers.")
     }
 
     loadEventHandlers() {
@@ -123,7 +123,7 @@ class App {
                 this.log.error(`Error whie executing the event handler: ${eventHandler.name}`, response);
             })
         });
-
+        this.log.debug("Loaded event handlers.")
     }
 
     addSchema(name, schema) {
@@ -132,6 +132,7 @@ class App {
 
     async connectToMongoDB() {
         await mongoose.connect(this.config.dbURL);
+        this.log.debug("Connected to MongoDB.")
     }
 
     /**
@@ -148,5 +149,3 @@ class App {
         await this.client.login(this.config.token);
     }
 }
-
-export default App;
