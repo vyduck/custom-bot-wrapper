@@ -1,12 +1,3 @@
-export { App } from "./classes/app.js";
-export { CommandHandler } from "./classes/commandHandler.js";
-export { EventHandler } from "./classes/eventHandler.js";
-declare namespace _default {
-    export { App };
-    export { CommandHandler };
-    export { EventHandler };
-}
-export default _default;
-import { App } from "./classes/app.js";
-import { CommandHandler } from "./classes/commandHandler.js";
-import { EventHandler } from "./classes/eventHandler.js";
+export * as Stores from "./stores/index.js";
+export * as Utils from "./utils/index.js";
+export { App as default, App, CommandHandler, EventHandler } from "./classes/index.js";
