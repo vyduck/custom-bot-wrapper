@@ -95,17 +95,17 @@ export class App {
         this.client.on("interactionCreate", async (interaction) => {
             if (!(interaction instanceof discord.ChatInputCommandInteraction)) return;
 
-            const response = await this.commands.get(interaction.command).execute(interaction);
+            await interaction.deferReply();
+
+            const response = await this.commands.get(interaction.commandName).execute(interaction);
 
             if (response.success) return;
 
             try {
-                interaction.reply({
-                    ephemeral: true,
-                    content:
-                        `The execution of the command failed because of the following reason: \`${response.response}\`\n` +
-                        "```\n" + JSON.stringify(response.info, Object.getOwnPropertyNames(response.info))
-                });
+                interaction.editReply(
+                    `The execution of the command failed because of the following reason: \`${response.response}\`\n` +
+                    "```\n" + JSON.stringify(response.info, Object.getOwnPropertyNames(response.info))
+                );
             } catch (error) {
                 this.log.error(`Error while executing the command: ${interaction.command}.`, error);
             }

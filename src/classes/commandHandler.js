@@ -1,5 +1,6 @@
 import { ChatInputCommandInteraction, Message, PermissionsBitField, SlashCommandBuilder } from "discord.js";
 import { App } from "./app.js";
+import { getPerms } from "../utils/getPerms.js";
 
 export class CommandHandler {
     /** @type {App} */
@@ -45,7 +46,7 @@ export class CommandHandler {
      */
     async execute(interaction) {
         // Permission check
-        const botPerms = interaction.guild.members.me.permissionsIn(interaction.channel);
+        const botPerms = await getPerms(interaction.guild, interaction.channel);
         const missing = botPerms.missing(this.perms.bitfield);
         if (missing.length != 0) return {
             success: false,
