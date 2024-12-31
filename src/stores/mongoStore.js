@@ -2,14 +2,8 @@ import { Model } from "mongoose";
 import { ObjectStore } from "./objectStore.js";
 
 export class MongoStore extends ObjectStore {
-    /** @type {string} */
-    name;
-
     /** @type {Model} */
     store;
-
-    /** @type {Function} */
-    template;
 
     /**
      * Constructor of mongo store
@@ -19,7 +13,13 @@ export class MongoStore extends ObjectStore {
      * @param {Model} options.model mongoose model corresponding to the store
      */
     constructor({
-        name, template, model
+        name,
+        template = function (objectId) {
+            return new this.store({
+                id: objectId
+            })
+        },
+        model
     }) {
         super({
             name, template
