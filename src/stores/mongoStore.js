@@ -14,9 +14,18 @@ export class MongoStore extends ObjectStore {
     /**
      * Constructor of mongo store
      * @param {Object} options options for constructing mongo store
+     * @param {string} options.name name of the store
+     * @param {Function} options.template a function to generate the outline of an object
+     * @param {Model} options.model mongoose model corresponding to the store
      */
-    constructor(options) {
-        super(options)
+    constructor({
+        name, template, model
+    }) {
+        super({
+            name, template
+        });
+
+        this.store = model;
     };
 
     /**
