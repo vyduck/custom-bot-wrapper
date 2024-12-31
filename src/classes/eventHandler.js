@@ -19,7 +19,6 @@ export class EventHandler {
 
     /**
      * 
-     * @param {App} app app to which this event handler should be registered
      * @param {Object} options options for the event handler
      * @param {string} options.name name of the event
      * @param {Function} options.exec execution function of the event handler
@@ -36,7 +35,7 @@ export class EventHandler {
         this.perms = perms;
         this.exec = exec;
         this.once = once;
-    }
+    };
 
     /**
      * 

@@ -19,7 +19,6 @@ export class CommandHandler {
 
     /**
      * Constructor of command
-     * @param {App} app The app this command belongs to
      * @param {Object} options Options for constructing command
      * @param {string} options.name Name of the command
      * @param {Function} options.exec execution function of the command handler
