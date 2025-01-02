@@ -53,7 +53,7 @@ export class EventHandler {
                 response
             }
         } catch (error) {
-            this.app.log.error(error);
+            this.app.log.error(error.toString());
             return {
                 success: false,
                 response: error

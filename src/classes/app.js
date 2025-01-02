@@ -117,7 +117,7 @@ export class App {
             try {
                 interaction.editReply(
                     `The execution of the command failed because of the following reason: \`${response.response}\`\n` +
-                    "```\n" + JSON.stringify(response.info, Object.getOwnPropertyNames(response.info))
+                    "```\n" + JSON.stringify(response.info, Object.getOwnPropertyNames(response.info)) + "```"
                 );    
             } catch (error) {
                 this.log.error(`Error while executing the command: ${interaction.command}.`, error);

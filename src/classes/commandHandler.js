@@ -62,7 +62,7 @@ export class CommandHandler {
                 response,
             };
         } catch (error) {
-            this.app.log.error(error);
+            this.app.log.error(error.toString());
             return {
                 success: false,
                 response: error.toString(),
