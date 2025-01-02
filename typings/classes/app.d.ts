@@ -34,15 +34,28 @@ export class App {
      * @param {EventHandler} eventHandler command to be added
      */
     addEventHandler(eventHandler: EventHandler): void;
-    publishCommands(): Promise<void>;
-    loadCommandHandlers(): void;
-    loadEventHandlers(): void;
-    addSchema(name: any, schema: any): void;
-    connectToMongoDB(): Promise<void>;
     /**
-     *
-     * @param {Object} options
-     * @param {string} options.token    - token of the discord client
+     * @param {ObjectStore} store store to be added
+     */
+    addStore(store: ObjectStore): void;
+    /**
+     * @private
+     */
+    private publishCommands;
+    /**
+     * @private
+     */
+    private loadCommandHandlers;
+    /**
+     * @private
+     */
+    private loadEventHandlers;
+    /**
+     * @private
+     */
+    private connectToMongoDB;
+    /**
+     * Starts the bot
      */
     start(): Promise<void>;
 }
@@ -50,3 +63,4 @@ import * as discord from "discord.js";
 import { CommandHandler } from "./commandHandler.js";
 import { EventHandler } from "./eventHandler.js";
 import { Logger } from "winston";
+import { ObjectStore } from "../stores/objectStore.js";

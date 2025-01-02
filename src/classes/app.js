@@ -4,6 +4,7 @@ import { EventHandler } from "./eventHandler.js";
 import { logger } from "./logger.js";
 import { Logger } from "winston";
 import mongoose from "mongoose";
+import { ObjectStore } from "../stores/objectStore.js";
 
 export class App {
     /** @type {Object} */
@@ -70,12 +71,21 @@ export class App {
         eventHandler.app = this;
     }
 
+    /**
+     * @param {ObjectStore} store store to be added
+     */
+    addStore(store) {
+        this.db[store.name] = store;
+    }
 
+    /**
+     * @private 
+     */
     async publishCommands() {
         let commandData = [];
         this.commands.values().forEach(commandHandler => {
             commandData.push(commandHandler.builder.toJSON())
-        });
+        });    
 
         const rest = new discord.REST().setToken(this.config.token);
 
@@ -83,14 +93,17 @@ export class App {
             const data = await rest.put(
                 discord.Routes.applicationCommands(this.config.clientId),
                 { body: commandData }
-            );
+            );    
 
             this.log.debug(`Successfully (re)published ${data.length} commands.`);
         } catch (error) {
             this.log.error("Error while uploading commands.", error);
-        };
-    }
-
+        };    
+    }    
+    
+    /**
+     * @private 
+     */
     loadCommandHandlers() {
         this.client.on("interactionCreate", async (interaction) => {
             if (!(interaction instanceof discord.ChatInputCommandInteraction)) return;
@@ -105,40 +118,40 @@ export class App {
                 interaction.editReply(
                     `The execution of the command failed because of the following reason: \`${response.response}\`\n` +
                     "```\n" + JSON.stringify(response.info, Object.getOwnPropertyNames(response.info))
-                );
+                );    
             } catch (error) {
                 this.log.error(`Error while executing the command: ${interaction.command}.`, error);
-            }
-        });
+            }    
+        });    
         this.log.debug("Loaded command handlers.")
-    }
+    }    
 
+    /**
+     * @private 
+     */
     loadEventHandlers() {
         this.events.values().forEach(eventHandler => {
             this.client[eventHandler.once ? "once" : "on"](eventHandler.name, async (...args) => {
                 const response = await eventHandler.execute(...args);
 
                 if (response.success) return;
-
+                
                 this.log.error(`Error whie executing the event handler: ${eventHandler.name}`, response);
-            })
-        });
+            })        
+        });        
         this.log.debug("Loaded event handlers.")
-    }
-
-    addSchema(name, schema) {
-        this.db[name] = schema;
-    }
-
+    }        
+    
+    /**
+     * @private
+     */
     async connectToMongoDB() {
         await mongoose.connect(this.config.dbURL);
         this.log.debug("Connected to MongoDB.")
     }
 
     /**
-     * 
-     * @param {Object} options
-     * @param {string} options.token    - token of the discord client
+     * Starts the bot
      */
     async start() {
         await this.publishCommands();
